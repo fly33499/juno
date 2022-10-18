@@ -1,6 +1,10 @@
 package types
 
-import "strings"
+import (
+	"fmt"
+	"os"
+	"strings"
+)
 
 var CustomAccountParser = []string{ // for desmos
 	"ownerAddress", "creator", "toAddress", "granter", "grantee", "owner", "withdraw_address",
@@ -44,6 +48,10 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 		for i := 0; i < total; i++ {
 			addresses += addressList[i] + ","
 		}
+
+		fmt.Println("ownerList")
+		os.Exit(3)
+
 	}
 
 	if msgText, ok := msg["msgs"].(string); ok {
@@ -64,6 +72,9 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 				addresses += userAddress + ","
 			}
 		}
+
+		fmt.Println("msgs")
+		os.Exit(3)
 	}
 
 	if input, ok := msg["input"].([]map[string]interface{}); ok {
