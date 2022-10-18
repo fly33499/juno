@@ -1,7 +1,7 @@
 package types
 
 var CustomAccountParser = []string{ // for desmos
-	"sender", "receiver", "user", "counterparty", "blocker", "blocked",
+	"ownerAddress", "creator", "toAddress", "granter", "grantee", "owner",
 }
 
 var DefaultAccountParser = []string{
