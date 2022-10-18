@@ -1,7 +1,7 @@
 package types
 
 var CustomAccountParser = []string{ // for desmos
-	"ownerAddress", "creator", "toAddress", "granter", "grantee", "owner",
+	"ownerAddress", "creator", "toAddress", "granter", "grantee", "owner", "withdraw_address", "ownerList", "msgs",
 }
 
 var DefaultAccountParser = []string{
