@@ -1,7 +1,7 @@
 package types
 
 var CustomAccountParser = []string{ // for desmos
-	"ownerAddress", "creator", "toAddress", "granter", "grantee", "owner", "withdraw_address", "ownerList", "msgs",
+	"ownerAddress", "creator", "toAddress", "granter", "grantee", "owner", "withdraw_address",
 }
 
 var DefaultAccountParser = []string{
@@ -17,6 +17,14 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 	for _, role := range accountParser {
 		if address, ok := msg[role].(string); ok {
 			addresses += address + ","
+		}
+	}
+
+	if addressList, ok := msg["ownerList"].([]string); ok {
+
+		total := len(addressList)
+		for i := 0; i < total; i++ {
+			addresses += addressList[i] + ","
 		}
 	}
 
