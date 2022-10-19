@@ -48,7 +48,11 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 
 		fmt.Println(msgType)
 
-		if addressList, ok := msg["ownerList"].(string); ok {
+		justString := fmt.Sprint(msg["ownerList"])
+		fmt.Println("justString")
+		fmt.Println(justString)
+
+		if addressList, ok := msg["ownerList"].([]string); ok {
 
 			total := len(addressList)
 			for i := 0; i < total; i++ {
