@@ -2,6 +2,7 @@ package types
 
 import (
 	"fmt"
+	"os"
 	"strings"
 )
 
@@ -45,11 +46,11 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 
 	if msgType == "firmachain.firmachain.contract.MsgCreateContractFile" {
 
-		fmt.Println(msgType)
-		fmt.Println(addresses)
+		//fmt.Println(msgType)
+		//fmt.Println(addresses)
 
 		msgText := fmt.Sprint(msg["ownerList"])
-		fmt.Println(msgText)
+		//fmt.Println(msgText)
 
 		if len(msgText) > 0 {
 
@@ -64,8 +65,8 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 			}
 		}
 
-		fmt.Println(msgType)
-		fmt.Println(addresses)
+		//fmt.Println(msgType)
+		//fmt.Println(addresses)
 		//os.Exit(3)
 	}
 
@@ -90,9 +91,9 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 			}
 		}*/
 
-		//fmt.Println(msgType)
-		//fmt.Println(addresses)
-		//os.Exit(3)
+		fmt.Println(msgType)
+		fmt.Println(addresses)
+		os.Exit(3)
 	}
 
 	/*if msgText, ok := msg["msgs"].(string); ok {
