@@ -2,7 +2,6 @@ package types
 
 import (
 	"fmt"
-	"os"
 	"strings"
 )
 
@@ -67,10 +66,36 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 
 		fmt.Println(msgType)
 		fmt.Println(addresses)
-		os.Exit(3)
+		//os.Exit(3)
 	}
 
-	if msgText, ok := msg["msgs"].(string); ok {
+	if msgType == "cosmos.authz.v1beta1.MsgExec" {
+
+		//fmt.Println(msgType)
+		//fmt.Println(addresses)
+
+		msgText := fmt.Sprint(msg["msgs"])
+		fmt.Println(msgText)
+
+		/*if len(msgText) > 0 {
+
+			trimmedStr := strings.Trim(msgText, "[]")
+			strList := strings.Split(trimmedStr, " ")
+
+			for _, str := range strList {
+
+				if len(str) > 0 {
+					addresses += str + ","
+				}
+			}
+		}*/
+
+		//fmt.Println(msgType)
+		//fmt.Println(addresses)
+		//os.Exit(3)
+	}
+
+	/*if msgText, ok := msg["msgs"].(string); ok {
 
 		slice := strings.Split(msgText, " ")
 
@@ -91,7 +116,7 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 
 		fmt.Println("msgs")
 		os.Exit(3)
-	}
+	}*/
 
 	if input, ok := msg["input"].([]map[string]interface{}); ok {
 		for _, i := range input {
