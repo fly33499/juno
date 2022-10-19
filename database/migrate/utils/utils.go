@@ -46,6 +46,8 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 
 	if msgType == "firmachain.firmachain.contract.MsgCreateContractFile" {
 
+		fmt.Println(msgType)
+
 		if addressList, ok := msg["ownerList"].(string); ok {
 
 			total := len(addressList)
