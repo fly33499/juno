@@ -50,10 +50,11 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 		fmt.Println(addresses)
 
 		msgText := fmt.Sprint(msg["ownerList"])
+		fmt.Println(msgText)
 
 		if len(msgText) > 0 {
 
-			trimmedStr := strings.Trim("msgText", "[]")
+			trimmedStr := strings.Trim(msgText, "[]")
 			strList := strings.Split(trimmedStr, " ")
 
 			for _, str := range strList {
