@@ -28,13 +28,13 @@ func ParseAddressInMsg(msgText string) (addresses string) {
 			idx := strings.Index(msgTempText, "firma1")
 			if idx != -1 {
 				const lenghOfAddress = 44
-				temp := msgTempText[idx : idx+lenghOfAddress]
+				tempAddress := msgTempText[idx : idx+lenghOfAddress]
 				msgTempText = msgTempText[idx+lenghOfAddress:]
 				totalLength = len(msgTempText)
 				i = 0
 
-				if !strings.Contains(addresses, temp) {
-					addresses += temp + ","
+				if !strings.Contains(addresses, tempAddress) {
+					addresses += tempAddress + ","
 				}
 			}
 		}
@@ -46,13 +46,13 @@ func ParseAddressInMsg(msgText string) (addresses string) {
 			idx := strings.Index(msgTempText, "firmavaloper1")
 			if idx != -1 {
 				const lenghOfValidatorAddress = 51
-				temp := msgTempText[idx : idx+lenghOfValidatorAddress]
+				tempAddress := msgTempText[idx : idx+lenghOfValidatorAddress]
 				msgTempText = msgTempText[idx+lenghOfValidatorAddress:]
 				totalLength = len(msgTempText)
 				i = 0
 
-				if !strings.Contains(addresses, temp) {
-					addresses += temp + ","
+				if !strings.Contains(addresses, tempAddress) {
+					addresses += tempAddress + ","
 				}
 			}
 		}
