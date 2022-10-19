@@ -32,18 +32,41 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 
 		msgText := fmt.Sprint(msg["ownerList"])
 
-		if len(msgText) > 0 {
+		fmt.Println(msgText)
 
-			trimmedStr := strings.Trim(msgText, "[]")
-			strList := strings.Split(trimmedStr, " ")
+		totalLength := len(msgText)
 
-			for _, str := range strList {
+		fmt.Println("totalLength")
+		fmt.Println(totalLength)
 
-				if len(str) > 0 {
+		if totalLength > 0 {
 
-					if !strings.Contains(addresses, str) {
-						addresses += str + ","
+			for i := 0; i < totalLength; i++ {
+				idx := strings.Index(msgText, "firma1")
+				if idx != -1 {
+					const lenghOfAddress = 44
+					temp := msgText[idx : idx+lenghOfAddress]
+					i += (idx + lenghOfAddress)
+
+					if !strings.Contains(addresses, temp) {
+						addresses += temp + ","
 					}
+
+					fmt.Println(temp)
+				}
+			}
+
+			for i := 0; i < totalLength; i++ {
+				idx := strings.Index(msgText, "firmavaloper1")
+				if idx != -1 {
+					const lenghOfValidatorAddress = 51
+					temp := msgText[idx : idx+lenghOfValidatorAddress]
+					i += (idx + lenghOfValidatorAddress)
+
+					if !strings.Contains(addresses, temp) {
+						addresses += temp + ","
+					}
+					fmt.Println(temp)
 				}
 			}
 		}
@@ -68,7 +91,9 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 					temp := msgText[idx : idx+lenghOfAddress]
 					i += (idx + lenghOfAddress)
 
-					addresses += temp + ","
+					if !strings.Contains(addresses, temp) {
+						addresses += temp + ","
+					}
 
 					fmt.Println(temp)
 				}
@@ -81,7 +106,9 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 					temp := msgText[idx : idx+lenghOfValidatorAddress]
 					i += (idx + lenghOfValidatorAddress)
 
-					addresses += temp + ","
+					if !strings.Contains(addresses, temp) {
+						addresses += temp + ","
+					}
 					fmt.Println(temp)
 				}
 			}
@@ -91,29 +118,6 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 		fmt.Println(addresses)
 		os.Exit(3)
 	}
-
-	/*if msgText, ok := msg["msgs"].(string); ok {
-
-		slice := strings.Split(msgText, " ")
-
-		for _, str := range slice {
-
-			userAddress := between(str, "firma1", "\"")
-
-			if len(userAddress) > 0 {
-				addresses += userAddress + ","
-			}
-
-			valoperAddress := between(str, "firmavaloper1", "\"")
-
-			if len(valoperAddress) > 0 {
-				addresses += userAddress + ","
-			}
-		}
-
-		fmt.Println("msgs")
-		os.Exit(3)
-	}*/
 
 	if input, ok := msg["input"].([]map[string]interface{}); ok {
 		for _, i := range input {
