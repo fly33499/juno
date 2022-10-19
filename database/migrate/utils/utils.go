@@ -47,29 +47,26 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 	if msgType == "firmachain.firmachain.contract.MsgCreateContractFile" {
 
 		fmt.Println(msgType)
+		fmt.Println(addresses)
 
-		justString := fmt.Sprint(msg["ownerList"])
-		fmt.Println("justString")
-		fmt.Println(justString)
+		msgText := fmt.Sprint(msg["ownerList"])
 
-		if addressList, ok := msg["ownerList"].([]string); ok {
+		if len(msgText) > 0 {
 
-			total := len(addressList)
-			for i := 0; i < total; i++ {
-				//	addresses += addressList[i] + ","
+			trimmedStr := strings.Trim("msgText", "[]")
+			strList := strings.Split(trimmedStr, " ")
+
+			for _, str := range strList {
+
+				if len(str) > 0 {
+					addresses += str + ","
+				}
 			}
-
-			fmt.Println("ownerList OK")
-			fmt.Println(msg["ownerList"])
-			os.Exit(3)
-		} else {
-
-			fmt.Println("ownerList Error")
-			fmt.Println(msg["ownerList"])
-
-			os.Exit(3)
 		}
 
+		fmt.Println(msgType)
+		fmt.Println(addresses)
+		os.Exit(3)
 	}
 
 	if msgText, ok := msg["msgs"].(string); ok {
