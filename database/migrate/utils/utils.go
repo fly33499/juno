@@ -46,14 +46,15 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 
 	if msgType == "firmachain.firmachain.contract.MsgCreateContractFile" {
 
-		if addressList, ok := msg["ownerList"].([]string); ok {
+		if addressList, ok := msg["ownerList"].(string); ok {
 
 			total := len(addressList)
 			for i := 0; i < total; i++ {
 				//	addresses += addressList[i] + ","
 			}
 
-			fmt.Println("ownerList")
+			fmt.Println("ownerList OK")
+			fmt.Println(msg["ownerList"])
 			os.Exit(3)
 		} else {
 
