@@ -42,15 +42,26 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 		}
 	}
 
-	if addressList, ok := msg["ownerList"].([]string); ok {
+	msgType := msg["@type"].(string)[1:]
 
-		total := len(addressList)
-		for i := 0; i < total; i++ {
-			addresses += addressList[i] + ","
+	if msgType == "firmachain.firmachain.contract.MsgCreateContractFile" {
+
+		if addressList, ok := msg["ownerList"].([]string); ok {
+
+			total := len(addressList)
+			for i := 0; i < total; i++ {
+				//	addresses += addressList[i] + ","
+			}
+
+			fmt.Println("ownerList")
+			os.Exit(3)
+		} else {
+
+			fmt.Println("ownerList Error")
+			fmt.Println(msg["ownerList"])
+
+			os.Exit(3)
 		}
-
-		fmt.Println("ownerList")
-		os.Exit(3)
 
 	}
 
