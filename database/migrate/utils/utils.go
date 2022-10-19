@@ -56,13 +56,16 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 
 		totalLength := len(msgText)
 
+		fmt.Println("totalLength")
+		fmt.Println(totalLength)
+
 		if totalLength > 0 {
 
 			for i := 0; i < totalLength; i++ {
 				idx := strings.Index(msgText, "firma1")
 				if idx != -1 {
 					const lenghOfAddress = 44
-					temp := msgText[idx:lenghOfAddress]
+					temp := msgText[idx : idx+lenghOfAddress]
 					i += lenghOfAddress
 
 					addresses += temp + ","
@@ -75,7 +78,7 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 				idx := strings.Index(msgText, "firmavaloper1")
 				if idx != -1 {
 					const lenghOfValidatorAddress = 51
-					temp := msgText[idx:lenghOfValidatorAddress]
+					temp := msgText[idx : idx+lenghOfValidatorAddress]
 					i += lenghOfValidatorAddress
 
 					addresses += temp + ","
