@@ -16,22 +16,6 @@ var DefaultAccountParser = []string{
 	"validator_dst_address", "validator_src_address",
 }
 
-func between(value string, a string, b string) string {
-	// Get substring between two strings.
-	posFirst := strings.Index(value, a)
-	if posFirst == -1 {
-		return ""
-	}
-
-	length := len(value)
-
-	posLast := strings.Index(value[posFirst:length], b)
-	if posLast == -1 {
-		return ""
-	}
-	return (value[posFirst:length])[:posLast]
-}
-
 func MessageParser(msg map[string]interface{}) (addresses string) {
 	accountParser := append(DefaultAccountParser, CustomAccountParser...)
 
@@ -46,11 +30,7 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 
 	if msgType == "firmachain.firmachain.contract.MsgCreateContractFile" {
 
-		//fmt.Println(msgType)
-		//fmt.Println(addresses)
-
 		msgText := fmt.Sprint(msg["ownerList"])
-		//fmt.Println(msgText)
 
 		if len(msgText) > 0 {
 
@@ -60,36 +40,49 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 			for _, str := range strList {
 
 				if len(str) > 0 {
-					addresses += str + ","
+
+					if !strings.Contains(addresses, str) {
+						addresses += str + ","
+					}
 				}
 			}
 		}
-
-		//fmt.Println(msgType)
-		//fmt.Println(addresses)
-		//os.Exit(3)
 	}
 
 	if msgType == "cosmos.authz.v1beta1.MsgExec" {
 
-		//fmt.Println(msgType)
-		//fmt.Println(addresses)
-
 		msgText := fmt.Sprint(msg["msgs"])
 		fmt.Println(msgText)
 
-		/*if len(msgText) > 0 {
+		totalLength := len(msgText)
 
-			trimmedStr := strings.Trim(msgText, "[]")
-			strList := strings.Split(trimmedStr, " ")
+		if totalLength > 0 {
 
-			for _, str := range strList {
+			for i := 0; i < totalLength; i++ {
+				idx := strings.Index(msgText, "firma1")
+				if idx != -1 {
+					const lenghOfAddress = 44
+					temp := msgText[idx:lenghOfAddress]
+					i += lenghOfAddress
 
-				if len(str) > 0 {
-					addresses += str + ","
+					addresses += temp + ","
+
+					fmt.Println(temp)
 				}
 			}
-		}*/
+
+			for i := 0; i < totalLength; i++ {
+				idx := strings.Index(msgText, "firmavaloper1")
+				if idx != -1 {
+					const lenghOfValidatorAddress = 51
+					temp := msgText[idx:lenghOfValidatorAddress]
+					i += lenghOfValidatorAddress
+
+					addresses += temp + ","
+					fmt.Println(temp)
+				}
+			}
+		}
 
 		fmt.Println(msgType)
 		fmt.Println(addresses)
