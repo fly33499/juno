@@ -2,7 +2,6 @@ package types
 
 import (
 	"fmt"
-	"os"
 	"strings"
 )
 
@@ -72,19 +71,19 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 
 			fmt.Println(msgType)
 			fmt.Println(addresses)
-			os.Exit(3)
+			//os.Exit(3)
 		}
 	}
 
 	if msgType == "cosmos.authz.v1beta1.MsgExec" {
 
 		msgText := fmt.Sprint(msg["msgs"])
-		fmt.Println(msgText)
+		//fmt.Println(msgText)
 
 		totalLength := len(msgText)
 
-		fmt.Println("totalLength")
-		fmt.Println(totalLength)
+		//fmt.Println("totalLength")
+		//fmt.Println(totalLength)
 
 		if totalLength > 0 {
 
@@ -99,7 +98,7 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 						addresses += temp + ","
 					}
 
-					fmt.Println(temp)
+					//fmt.Println(temp)
 				}
 			}
 
@@ -113,7 +112,7 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 					if !strings.Contains(addresses, temp) {
 						addresses += temp + ","
 					}
-					fmt.Println(temp)
+					//fmt.Println(temp)
 				}
 			}
 		}
