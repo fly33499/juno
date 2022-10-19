@@ -66,7 +66,7 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 				if idx != -1 {
 					const lenghOfAddress = 44
 					temp := msgText[idx : idx+lenghOfAddress]
-					i += lenghOfAddress
+					i += (idx + lenghOfAddress)
 
 					addresses += temp + ","
 
@@ -79,7 +79,7 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 				if idx != -1 {
 					const lenghOfValidatorAddress = 51
 					temp := msgText[idx : idx+lenghOfValidatorAddress]
-					i += lenghOfValidatorAddress
+					i += (idx + lenghOfValidatorAddress)
 
 					addresses += temp + ","
 					fmt.Println(temp)
