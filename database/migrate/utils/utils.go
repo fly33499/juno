@@ -2,7 +2,6 @@ package types
 
 import (
 	"fmt"
-	"os"
 	"strings"
 )
 
@@ -114,9 +113,9 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 			}
 		}
 
-		fmt.Println(msgType)
-		fmt.Println(addresses)
-		os.Exit(3)
+		// fmt.Println(msgType)
+		// fmt.Println(addresses)
+		// os.Exit(3)
 	}
 
 	if input, ok := msg["input"].([]map[string]interface{}); ok {
