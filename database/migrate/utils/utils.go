@@ -40,12 +40,16 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 
 		if totalLength > 0 {
 
+			msgTempText := msgText
+
 			for i := 0; i < totalLength; i++ {
-				idx := strings.Index(msgText, "firma1")
+				idx := strings.Index(msgTempText, "firma1")
 				if idx != -1 {
 					const lenghOfAddress = 44
-					temp := msgText[idx : idx+lenghOfAddress]
-					i += (idx + lenghOfAddress)
+					temp := msgTempText[idx : idx+lenghOfAddress]
+					msgTempText = msgTempText[idx+lenghOfAddress:]
+					totalLength = len(msgTempText)
+					i = 0
 
 					if !strings.Contains(addresses, temp) {
 						addresses += temp + ","
@@ -55,12 +59,17 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 				}
 			}
 
+			totalLength := len(msgText)
+			msgTempText = msgText
+
 			for i := 0; i < totalLength; i++ {
-				idx := strings.Index(msgText, "firmavaloper1")
+				idx := strings.Index(msgTempText, "firmavaloper1")
 				if idx != -1 {
 					const lenghOfValidatorAddress = 51
-					temp := msgText[idx : idx+lenghOfValidatorAddress]
-					i += (idx + lenghOfValidatorAddress)
+					temp := msgTempText[idx : idx+lenghOfValidatorAddress]
+					msgTempText = msgTempText[idx+lenghOfValidatorAddress:]
+					totalLength = len(msgTempText)
+					i = 0
 
 					if !strings.Contains(addresses, temp) {
 						addresses += temp + ","
