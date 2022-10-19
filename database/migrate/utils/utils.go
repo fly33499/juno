@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-var CustomAccountParser = []string{ // for desmos
+var CustomAccountParser = []string{ // for firmachain
 	"ownerAddress", "creator", "toAddress", "granter", "grantee", "owner", "withdraw_address",
 }
 
@@ -67,7 +67,9 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 	addresses += "{"
 	for _, role := range accountParser {
 		if address, ok := msg[role].(string); ok {
-			addresses += address + ","
+			if !strings.Contains(addresses, address) {
+				addresses += address + ","
+			}
 		}
 	}
 
