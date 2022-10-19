@@ -79,7 +79,7 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 		parsedAddresses := ParseAddressInMsg(msgText)
 
 		if len(parsedAddresses) > 0 {
-			addresses += parsedAddresses + ","
+			addresses += parsedAddresses
 		}
 	}
 
@@ -89,7 +89,7 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 		parsedAddresses := ParseAddressInMsg(msgText)
 
 		if len(parsedAddresses) > 0 {
-			addresses += parsedAddresses + ","
+			addresses += parsedAddresses
 		}
 	}
 
