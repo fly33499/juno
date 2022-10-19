@@ -6,7 +6,7 @@ import (
 )
 
 var CustomAccountParser = []string{ // for firmachain
-	"ownerAddress", "creator", "toAddress", "granter", "grantee", "owner", "withdraw_address",
+	"ownerAddress", "creator", "toAddress", "granter", "grantee", "owner", "withdraw_address", "contract", "new_admin", "admin",
 }
 
 var DefaultAccountParser = []string{
