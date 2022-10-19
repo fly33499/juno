@@ -15,7 +15,7 @@ var DefaultAccountParser = []string{
 	"validator_dst_address", "validator_src_address",
 }
 
-func ParseAddressInMsg(msgText string) (addresses string) {
+func ParseAddressInMsg(inputAddresses string, msgText string) (addresses string) {
 
 	orgTotalLength := len(msgText)
 
@@ -33,7 +33,7 @@ func ParseAddressInMsg(msgText string) (addresses string) {
 				totalLength = len(msgTempText)
 				i = 0
 
-				if !strings.Contains(addresses, tempAddress) {
+				if !strings.Contains(addresses, tempAddress) && !strings.Contains(inputAddresses, tempAddress) {
 					addresses += tempAddress + ","
 				}
 			}
@@ -51,7 +51,7 @@ func ParseAddressInMsg(msgText string) (addresses string) {
 				totalLength = len(msgTempText)
 				i = 0
 
-				if !strings.Contains(addresses, tempAddress) {
+				if !strings.Contains(addresses, tempAddress) && !strings.Contains(inputAddresses, tempAddress) {
 					addresses += tempAddress + ","
 				}
 			}
@@ -78,7 +78,7 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 	if msgType == "firmachain.firmachain.contract.MsgCreateContractFile" {
 
 		msgText := fmt.Sprint(msg["ownerList"])
-		parsedAddresses := ParseAddressInMsg(msgText)
+		parsedAddresses := ParseAddressInMsg(addresses, msgText)
 
 		if len(parsedAddresses) > 0 {
 			addresses += parsedAddresses
@@ -88,7 +88,7 @@ func MessageParser(msg map[string]interface{}) (addresses string) {
 	if msgType == "cosmos.authz.v1beta1.MsgExec" {
 
 		msgText := fmt.Sprint(msg["msgs"])
-		parsedAddresses := ParseAddressInMsg(msgText)
+		parsedAddresses := ParseAddressInMsg(addresses, msgText)
 
 		if len(parsedAddresses) > 0 {
 			addresses += parsedAddresses
