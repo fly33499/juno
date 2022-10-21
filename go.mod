@@ -252,4 +252,10 @@ require (
 	mvdan.cc/unparam v0.0.0-20220706161116-678bad134442 // indirect
 )
 
-replace github.com/gogo/protobuf => github.com/regen-network/protobuf v1.3.3-alpha.regen.1
+replace (
+	github.com/gogo/protobuf => github.com/regen-network/protobuf v1.3.3-alpha.regen.1
+
+	// Our tendermint branch is: https://github.com/forbole/tendermint v0.34.x-juno
+	// TODO: Remove this once https://github.com/tendermint/tendermint/pull/9416 is merged
+	github.com/tendermint/tendermint => github.com/forbole/tendermint v0.34.13-0.20220912101327-a0517f88c2be
+)
